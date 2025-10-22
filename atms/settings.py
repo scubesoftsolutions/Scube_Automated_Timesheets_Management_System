@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-smxci)1tl))64xjd!w87t5u9q))tb-nq8adg4uuv#ql0b(!qqt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'scube-automated-timesheets-management-q1c3.onrender.com',
+    '.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
 
 
 # Application definition
