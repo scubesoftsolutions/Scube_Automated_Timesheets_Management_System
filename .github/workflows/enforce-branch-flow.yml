@@ -1,0 +1,37 @@
+name: Enforce Branch Flow
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-merge-path:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Merge Path
+        run: |
+          BASE=${{ github.base_ref }}
+          HEAD=${{ github.head_ref }}
+
+          echo "🧩 Checking PR from $HEAD → $BASE"
+
+          if [[ "$BASE" == "test" && "$HEAD" != "dev" ]]; then
+            echo "❌ Only merges from dev → test are allowed!"
+            exit 1
+          fi
+
+          if [[ "$BASE" == "cicd" && "$HEAD" != "test" ]]; then
+            echo "❌ Only merges from test → cicd are allowed!"
+            exit 1
+          fi
+
+          if [[ "$BASE" == "pre-prod" && "$HEAD" != "cicd" ]]; then
+            echo "❌ Only merges from cicd → pre-prod are allowed!"
+            exit 1
+          fi
+
+          if [[ "$BASE" == "main" && "$HEAD" != "pre-prod" ]]; then
+            echo "❌ Only merges from pre-prod → main are allowed!"
+            exit 1
+          fi
+
+          echo "✅ Merge path is valid."
