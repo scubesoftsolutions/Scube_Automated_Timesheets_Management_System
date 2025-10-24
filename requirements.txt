@@ -1,1 +1,6 @@
-pip freeze > requirements.txt
+asgiref==3.8.1
+Django==5.1.2
+sqlparse==0.5.1
+tzdata==2025.1
+gunicorn==23.0.0
+dj-database-url==2.2.0
