@@ -1,3 +1,4 @@
 gggbg
 nuu
 nuun
+to run the server execute manage.py file
